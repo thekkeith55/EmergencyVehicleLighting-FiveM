@@ -253,8 +253,10 @@ namespace EVLClient.Utils
                 CitizenFX.Core.Debug.WriteLine("Bone is null for some reason!!!");
                 return;
             }
+
             var extraoffset = _vehicle.GetOffsetPosition(off + new Vector3(0.0f, 0.0f, 0.0f));
             DrawLightWithRangeAndShadow(extraoffset.X, extraoffset.Y, extraoffset.Z, red, green, blue, 50.0f, 0.007f, 0.01f);
+            // DrawSpotLight(extraoffset.X, extraoffset.Y, extraoffset.Z, dirVector.X, dirVector.Y, dirVector.Z, red, green, blue, 100.0f, 1f, 0.0f, 13.0f, 1f); 
         }
 
         internal Light(Entity entity, int modkit, int red, int green, int blue, string format = "", bool state = false)
