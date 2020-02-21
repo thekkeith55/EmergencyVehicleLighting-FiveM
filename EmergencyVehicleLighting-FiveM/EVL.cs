@@ -33,6 +33,7 @@ namespace EVLClient
         public static bool ELCSReady = false;
         bool panelOpen = true;
         bool crsl = false;
+        bool sb = false;
 
         public static Dictionary<int, ELCVeh> elcs_vehicles = new Dictionary<int, ELCVeh>();
 
@@ -288,11 +289,18 @@ namespace EVLClient
                     await Panel._DrawRect(0.749f, 0.452f, 0.0059f, 0.01f, 50, 50, 50, 255);
                 await Panel._DrawText("3", 140, 140, 140, 255, 0.757f, 0.442f, 0.23f, 0.23f, true, 0);
 
-                if (!crsl && curVehicleStage < 1)
-                    await Panel.DrawPanelButton("CSL", true, 0.750f, 0.494f, infoButtonLightRed, infoButtonLightGreen, infoButtonLightBlue);
+                if (!crsl)
+                    await Panel.DrawPanelButton("CSL", false, 0.750f, 0.494f, infoButtonLightRed, infoButtonLightGreen, infoButtonLightBlue);
                 else
                 {
-                    await Panel.DrawPanelButton("CSL", false, 0.750f, 0.494f, infoButtonLightRed, infoButtonLightGreen, infoButtonLightBlue);
+                    await Panel.DrawPanelButton("CSL", true, 0.750f, 0.494f, infoButtonLightRed, infoButtonLightGreen, infoButtonLightBlue);
+                }
+
+                if (!sb)
+                    await Panel.DrawPanelButton("SB", false, 0.828f, 0.535f, infoButtonLightRed, infoButtonLightGreen, infoButtonLightBlue);
+                else
+                {
+                    await Panel.DrawPanelButton("SB", true, 0.828f, 0.535f, infoButtonLightRed, infoButtonLightGreen, infoButtonLightBlue);
                 }
 
 
@@ -372,6 +380,7 @@ namespace EVLClient
                 DisableControlAction(0, Controls.KeyBindings.Snd_SrnTone2, true);
                 DisableControlAction(0, Controls.KeyBindings.Snd_SrnTone3, true);
                 DisableControlAction(0, Controls.KeyBindings.Sound_AHorn, true);
+                //BLKT is temp. SB key.
                 DisableControlAction(0, Controls.KeyBindings.Toggle_BLKT, true);
                 DisableControlAction(0, Controls.KeyBindings.Toggle_CRSL, true);
                 DisableControlAction(0, Controls.KeyBindings.Toggle_LSTG, true);
@@ -406,6 +415,21 @@ namespace EVLClient
                         crsl = !crsl;
                         SetVehicleMod(curVehicle.Handle, 0, 0, false);
                         SetVehicleMod(curVehicle.Handle, 6, 0, false);
+                        PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", false);
+                    }
+                }
+                if (IsDisabledControlPressed(0, 84) && IsDisabledControlJustPressed(0, Controls.KeyBindings.Toggle_BLKT))
+                {
+                    if (!sb)
+                    {
+                        sb = !sb;
+                        SetVehicleMod(curVehicle.Handle, 33, 1, false);
+                        PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", false);
+                    }
+                    else if (sb)
+                    {
+                        sb = !sb;
+                        SetVehicleMod(curVehicle.Handle, 33, 0, false);
                         PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", false);
                     }
                 }
