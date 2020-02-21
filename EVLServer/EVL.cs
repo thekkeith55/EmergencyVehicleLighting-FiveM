@@ -21,7 +21,7 @@ namespace EVLServer
         {
             Debug.WriteLine("------------- Loaded ELC FiveM ---------------");
             Debug.WriteLine("                Made by MrDaGree");
-            Debug.WriteLine("                   And TheKeith");
+            Debug.WriteLine("                   and TheKeith");
             Debug.WriteLine("--------------------------------------------------");
 
             string folder = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) + @"\resources\evl\vcf\";
