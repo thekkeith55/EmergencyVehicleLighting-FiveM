@@ -1,4 +1,4 @@
-# EmergencyightingControl-FiveM
+# EmergencyLightingControl-FiveM
 
 # Old FiveM CSharp code. 
 
